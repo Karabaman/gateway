@@ -1,10 +1,10 @@
 <?php
 
-namespace Ako\Gateway\Sadad;
+namespace Karabaman\Gateway\Sadad;
 
 use SoapClient;
-use Ako\Gateway\PortAbstract;
-use Ako\Gateway\PortInterface;
+use Karabaman\Gateway\PortAbstract;
+use Karabaman\Gateway\PortInterface;
 
 class Sadad extends PortAbstract implements PortInterface
 {
@@ -111,7 +111,6 @@ class Sadad extends PortAbstract implements PortInterface
 				$this->config['sadad']['terminalId'],
 				$this->getCallback()
 			);
-
 		} catch (\SoapFault $e) {
 			$this->transactionFailed();
 			$this->newLog('SoapFault', $e->getMessage());
@@ -148,7 +147,6 @@ class Sadad extends PortAbstract implements PortInterface
 				$this->refId(),
 				$this->amount
 			);
-
 		} catch (\SoapFault $e) {
 			$this->transactionFailed();
 			$this->newLog('SoapFault', $e->getMessage());
@@ -197,7 +195,7 @@ class Sadad extends PortAbstract implements PortInterface
 			'en' => 'Unknown Error',
 			'retry' => false
 		);
-		
+
 
 		return $result;
 	}

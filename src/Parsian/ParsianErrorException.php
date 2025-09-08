@@ -1,7 +1,7 @@
 <?php
 
-namespace Ako\Gateway\Parsian;
+namespace Karabaman\Gateway\Parsian;
 
-use Ako\Gateway\Exceptions\BankException;
+use Karabaman\Gateway\Exceptions\BankException;
 
 class ParsianErrorException extends BankException {}

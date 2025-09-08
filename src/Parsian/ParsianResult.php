@@ -1,6 +1,6 @@
 <?php
 
-namespace Ako\Gateway\Parsian;
+namespace Karabaman\Gateway\Parsian;
 
 
 class ParsianResult
@@ -26,6 +26,6 @@ class ParsianResult
 
 	public static function errorMessage($errorId)
 	{
-		return isset(self::$errors[$errorId])?self::$errors[$errorId] : $errorId;
+		return isset(self::$errors[$errorId]) ? self::$errors[$errorId] : $errorId;
 	}
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace Ako\Gateway;
+namespace Karabaman\Gateway;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Ako\Gateway\GatewayResolver
+ * @see \Karabaman\Gateway\GatewayResolver
  */
 class Gateway extends Facade
 {

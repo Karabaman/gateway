@@ -1,11 +1,11 @@
 <?php
 
-namespace Ako\Gateway\Parsian;
+namespace Karabaman\Gateway\Parsian;
 
 use Illuminate\Support\Facades\Input;
 use SoapClient;
-use Ako\Gateway\PortAbstract;
-use Ako\Gateway\PortInterface;
+use Karabaman\Gateway\PortAbstract;
+use Karabaman\Gateway\PortInterface;
 
 class Parsian extends PortAbstract implements PortInterface
 {
@@ -97,7 +97,7 @@ class Parsian extends PortAbstract implements PortInterface
 	 *
 	 * @return void
 	 */
-	function setAdditionalData ($data)
+	function setAdditionalData($data)
 	{
 		$this->additionla_data = $data;
 	}
@@ -107,7 +107,7 @@ class Parsian extends PortAbstract implements PortInterface
 	 *
 	 * @return string 
 	 */
-	function getAdditionalData ()
+	function getAdditionalData()
 	{
 		return $this->additionla_data;
 	}
@@ -134,7 +134,6 @@ class Parsian extends PortAbstract implements PortInterface
 		try {
 			$soap = new SoapClient($this->server_url);
 			$response = $soap->SalePaymentRequest(['requestData' => $params]);
-
 		} catch (\SoapFault $e) {
 			$this->transactionFailed();
 			$this->newLog('SoapFault', $e->getMessage());
@@ -143,7 +142,7 @@ class Parsian extends PortAbstract implements PortInterface
 		if ($response !== false) {
 			$authority = $response->SalePaymentRequestResult->Token ?? null;
 			$status = $response->SalePaymentRequestResult->Status ?? null;
-			
+
 			if ($authority && $status == 0) {
 				$this->refId = $authority;
 				$this->transactionSetRefId();
@@ -154,7 +153,6 @@ class Parsian extends PortAbstract implements PortInterface
 			$this->transactionFailed();
 			$this->newLog($status, $errorMessage);
 			throw new ParsianErrorException($errorMessage, $status);
-
 		} else {
 			$this->transactionFailed();
 			$this->newLog(-1, 'خطا در اتصال به درگاه پارسیان');
@@ -169,7 +167,7 @@ class Parsian extends PortAbstract implements PortInterface
 	 */
 	protected function verifyPayment()
 	{
-		if (!Input::has("Token") || !Input::has("status") || !Input::has("RRN")) 
+		if (!Input::has("Token") || !Input::has("status") || !Input::has("RRN"))
 			throw new ParsianErrorException('درخواست غیر معتبر', -1);
 
 		$RRN 	= Input::get("RRN");
@@ -193,16 +191,15 @@ class Parsian extends PortAbstract implements PortInterface
 		try {
 			$soap = new SoapClient($this->confirm_url);
 			$result = $soap->ConfirmPayment(['requestData' => $params]);
-
 		} catch (\SoapFault $e) {
 			throw new ParsianErrorException($e->getMessage(), -1);
 		}
 
 		if ($result === false || !isset($result->ConfirmPaymentResult->Status))
 			throw new ParsianErrorException('پاسخ دریافتی از بانک نامعتبر است.', -1);
-		
+
 		$status = $result->ConfirmPaymentResult->Status;
-		
+
 		if ($status != 0) {
 			$errorMessage = ParsianResult::errorMessage($status);
 			$this->transactionFailed();

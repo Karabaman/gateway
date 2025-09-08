@@ -1,11 +1,11 @@
 <?php
 
-namespace Ako\Gateway\Payline;
+namespace Karabaman\Gateway\Payline;
 
 use Illuminate\Support\Facades\Input;
-use Ako\Gateway\Enum;
-use Ako\Gateway\PortAbstract;
-use Ako\Gateway\PortInterface;
+use Karabaman\Gateway\Enum;
+use Karabaman\Gateway\PortAbstract;
+use Karabaman\Gateway\PortInterface;
 
 class Payline extends PortAbstract implements PortInterface
 {

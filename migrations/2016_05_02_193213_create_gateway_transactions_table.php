@@ -2,9 +2,9 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Ako\Gateway\PortAbstract;
-use Ako\Gateway\GatewayResolver;
-use Ako\Gateway\Enum;
+use Karabaman\Gateway\PortAbstract;
+use Karabaman\Gateway\GatewayResolver;
+use Karabaman\Gateway\Enum;
 
 class CreateGatewayTransactionsTable extends Migration
 {

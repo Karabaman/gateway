@@ -1,5 +1,6 @@
 <?php
-namespace Ako\Gateway\Pasargad;
+
+namespace Karabaman\Gateway\Pasargad;
 
 class RSAProcessor
 {

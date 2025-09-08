@@ -1,6 +1,6 @@
 <?php
 
-namespace Ako\Gateway;
+namespace Karabaman\Gateway;
 
 class Enum
 {
@@ -14,8 +14,8 @@ class Enum
 	const SAMAN = 'SAMAN';
 	const ASANPARDAKHT = 'ASANPARDAKHT';
 	const PAYPAL = 'PAYPAL';
-  	const PAYIR = 'PAYIR';
-	
+	const PAYIR = 'PAYIR';
+
 	/**
 	 * Status code for status field in poolport_transactions table
 	 */
@@ -33,5 +33,4 @@ class Enum
 	 */
 	const TRANSACTION_FAILED = 'FAILED';
 	const TRANSACTION_FAILED_TEXT = 'عملیات پرداخت با خطا مواجه شد.';
-
 }

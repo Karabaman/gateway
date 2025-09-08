@@ -1,8 +1,8 @@
 <?php
 
-namespace Ako\Gateway\Payline;
+namespace Karabaman\Gateway\Payline;
 
-use Ako\Gateway\Exceptions\BankException;
+use Karabaman\Gateway\Exceptions\BankException;
 
 class PaylineReceiveException extends BankException
 {
@@ -17,6 +17,6 @@ class PaylineReceiveException extends BankException
     {
         $this->errorId = $errorId;
 
-        parent::__construct(@self::$errors[$errorId].' #'.$errorId, $errorId);
+        parent::__construct(@self::$errors[$errorId] . ' #' . $errorId, $errorId);
     }
 }

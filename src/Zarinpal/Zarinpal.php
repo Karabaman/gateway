@@ -1,13 +1,13 @@
 <?php
 
-namespace Ako\Gateway\Zarinpal;
+namespace Karabaman\Gateway\Zarinpal;
 
 use DateTime;
 use Illuminate\Support\Facades\Input;
-use Ako\Gateway\Enum;
+use Karabaman\Gateway\Enum;
 use SoapClient;
-use Ako\Gateway\PortAbstract;
-use Ako\Gateway\PortInterface;
+use Karabaman\Gateway\PortAbstract;
+use Karabaman\Gateway\PortInterface;
 
 class Zarinpal extends PortAbstract implements PortInterface
 {

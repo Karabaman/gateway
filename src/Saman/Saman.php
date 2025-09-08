@@ -1,11 +1,11 @@
 <?php
 
-namespace Ako\Gateway\Saman;
+namespace Karabaman\Gateway\Saman;
 
 use Illuminate\Support\Facades\Input;
 use SoapClient;
-use Ako\Gateway\PortAbstract;
-use Ako\Gateway\PortInterface;
+use Karabaman\Gateway\PortAbstract;
+use Karabaman\Gateway\PortInterface;
 
 class Saman extends PortAbstract implements PortInterface
 {
@@ -51,11 +51,11 @@ class Saman extends PortAbstract implements PortInterface
      * @param Array $data an array of data
      *
      */
-    function setOptionalData (Array $data)
+    function setOptionalData(array $data)
     {
         $this->optional_data = $data;
     }
-    
+
 
     /**
      * {@inheritdoc}
@@ -70,7 +70,7 @@ class Saman extends PortAbstract implements PortInterface
         ];
 
         $data = array_merge($main_data, $this->optional_data);
-        
+
         return \View::make('gateway::saman-redirector')->with($data);
     }
 
@@ -156,7 +156,6 @@ class Saman extends PortAbstract implements PortInterface
         try {
             $soap = new SoapClient($this->serverUrl);
             $response = $soap->VerifyTransaction($fields["RefNum"], $fields["merchantID"]);
-
         } catch (\SoapFault $e) {
             $this->transactionFailed();
             $this->newLog('SoapFault', $e->getMessage());
@@ -171,11 +170,10 @@ class Saman extends PortAbstract implements PortInterface
         }
 
         //Reverse Transaction
-        if($response>0){
+        if ($response > 0) {
             try {
                 $soap = new SoapClient($this->serverUrl);
                 $response = $soap->ReverseTransaction($fields["RefNum"], $fields["merchantID"], $fields["password"], $response);
-
             } catch (\SoapFault $e) {
                 $this->transactionFailed();
                 $this->newLog('SoapFault', $e->getMessage());
@@ -187,10 +185,5 @@ class Saman extends PortAbstract implements PortInterface
         $this->transactionFailed();
         $this->newLog($response, SamanException::$errors[$response]);
         throw new SamanException($response);
-        
-
-
     }
-
-
 }

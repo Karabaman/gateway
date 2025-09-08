@@ -1,18 +1,18 @@
 <?php
 
-namespace Ako\Gateway;
+namespace Karabaman\Gateway;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 
 class GatewayServiceProvider extends ServiceProvider
 {
-	/**
-	 * Indicates if loading of the provider is deferred.
-	 *
-	 * @var bool
-	 */
-	protected $defer = false;
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = false;
 
     /**
      * Actual provider
@@ -34,17 +34,17 @@ class GatewayServiceProvider extends ServiceProvider
         $this->provider = $this->getProvider();
     }
 
-	/**
-	 * Bootstrap the application services.
-	 *
-	 * @return void
-	 */
-	public function boot()
-	{
+    /**
+     * Bootstrap the application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
         if (method_exists($this->provider, 'boot')) {
             return $this->provider->boot();
         }
-	}
+    }
 
     /**
      * Return ServiceProvider according to Laravel version
@@ -54,21 +54,21 @@ class GatewayServiceProvider extends ServiceProvider
     private function getProvider()
     {
         if (version_compare(\Illuminate\Foundation\Application::VERSION, '5.0', '<')) {
-            $provider = 'Ako\Gateway\GatewayServiceProviderLaravel4';
+            $provider = 'Karabaman\Gateway\GatewayServiceProviderLaravel4';
         } else {
-            $provider = 'Ako\Gateway\GatewayServiceProviderLaravel5';
+            $provider = 'Karabaman\Gateway\GatewayServiceProviderLaravel5';
         }
 
         return new $provider($this->app);
     }
 
-	/**
-	 * Register the application services.
-	 *
-	 * @return void
-	 */
-	public function register()
-	{
-	    return $this->provider->register();
-	}
+    /**
+     * Register the application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        return $this->provider->register();
+    }
 }

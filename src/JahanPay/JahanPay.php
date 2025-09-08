@@ -1,12 +1,12 @@
 <?php
 
-namespace Ako\Gateway\JahanPay;
+namespace Karabaman\Gateway\JahanPay;
 
 use Illuminate\Support\Facades\Input;
-use Ako\Gateway\Enum;
+use Karabaman\Gateway\Enum;
 use SoapClient;
-use Ako\Gateway\PortAbstract;
-use Ako\Gateway\PortInterface;
+use Karabaman\Gateway\PortAbstract;
+use Karabaman\Gateway\PortInterface;
 
 class JahanPay extends PortAbstract implements PortInterface
 {
@@ -49,7 +49,7 @@ class JahanPay extends PortAbstract implements PortInterface
      */
     public function redirect()
     {
-        return \Redirect::to($this->gateUrl.$this->refId());
+        return \Redirect::to($this->gateUrl . $this->refId());
     }
 
     /**
@@ -107,8 +107,7 @@ class JahanPay extends PortAbstract implements PortInterface
                 $this->transactionId(),
                 ''
             );
-
-        } catch(\SoapFault $e) {
+        } catch (\SoapFault $e) {
             $this->transactionFailed();
             $this->newLog('SoapFault', $e->getMessage());
             throw $e;
@@ -161,8 +160,7 @@ class JahanPay extends PortAbstract implements PortInterface
                 $this->amount,
                 $this->refId
             );
-
-        } catch(\SoapFault $e) {
+        } catch (\SoapFault $e) {
             $this->transactionFailed();
             $this->newLog('SoapFault', $e->getMessage());
             throw $e;

@@ -1,9 +1,10 @@
 <?php
 
-namespace Ako\Gateway\Exceptions;
+namespace Karabaman\Gateway\Exceptions;
 
-class InvalidRequestException extends GatewayException {
+class InvalidRequestException extends GatewayException
+{
 
-	protected $code=-104;
-	protected $message='اطلاعات بازگشتی از بانک صحیح نمی باشد. ';
+	protected $code = -104;
+	protected $message = 'اطلاعات بازگشتی از بانک صحیح نمی باشد. ';
 }

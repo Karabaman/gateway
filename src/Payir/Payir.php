@@ -1,10 +1,11 @@
 <?php
-namespace Ako\Gateway\Payir;
+
+namespace Karabaman\Gateway\Payir;
 
 use Illuminate\Support\Facades\Input;
-use Ako\Gateway\Enum;
-use Ako\Gateway\PortAbstract;
-use Ako\Gateway\PortInterface;
+use Karabaman\Gateway\Enum;
+use Karabaman\Gateway\PortAbstract;
+use Karabaman\Gateway\PortInterface;
 
 class Payir extends PortAbstract implements PortInterface
 {
@@ -136,7 +137,7 @@ class Payir extends PortAbstract implements PortInterface
             return true;
         }
         $this->transactionFailed();
-        $this->newLog($response['errorCode'], PayirSendException::$errors[ $response['errorCode'] ]);
+        $this->newLog($response['errorCode'], PayirSendException::$errors[$response['errorCode']]);
         throw new PayirSendException($response['errorCode']);
     }
 
@@ -190,7 +191,7 @@ class Payir extends PortAbstract implements PortInterface
         }
 
         $this->transactionFailed();
-        $this->newLog($response['errorCode'], PayirReceiveException::$errors[ $response['errorCode'] ]);
+        $this->newLog($response['errorCode'], PayirReceiveException::$errors[$response['errorCode']]);
         throw new PayirReceiveException($response['errorCode']);
     }
 }

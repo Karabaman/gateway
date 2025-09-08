@@ -1,8 +1,8 @@
 <?php
 
-namespace Ako\Gateway\Asanpardakht;
+namespace Karabaman\Gateway\Asanpardakht;
 
-use Ako\Gateway\Exceptions\BankException;
+use Karabaman\Gateway\Exceptions\BankException;
 
 class AsanpardakhtException extends BankException
 {
@@ -170,6 +170,4 @@ class AsanpardakhtException extends BankException
 
         return $message;
     }
-
-
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace Ako\Gateway\Asanpardakht;
+namespace Karabaman\Gateway\Asanpardakht;
 
 use Illuminate\Support\Facades\Input;
 use SoapClient;
-use Ako\Gateway\PortAbstract;
-use Ako\Gateway\PortInterface;
+use Karabaman\Gateway\PortAbstract;
+use Karabaman\Gateway\PortInterface;
 
 class Asanpardakht extends PortAbstract implements PortInterface
 {
@@ -23,7 +23,7 @@ class Asanpardakht extends PortAbstract implements PortInterface
      * @param string $data
      *
      */
-    function setAdditionalData (String $data)
+    function setAdditionalData(String $data)
     {
         $this->additional_data = $data;
     }
@@ -32,7 +32,7 @@ class Asanpardakht extends PortAbstract implements PortInterface
      * Get additionla data
      * @return string 
      */
-    function getAdditionalData ()
+    function getAdditionalData()
     {
         return $this->additional_data;
     }
@@ -133,7 +133,6 @@ class Asanpardakht extends PortAbstract implements PortInterface
         try {
             $soap = new SoapClient($this->serverUrl);
             $response = $soap->RequestOperation($params);
-
         } catch (\SoapFault $e) {
             $this->transactionFailed();
             $this->newLog('SoapFault', $e->getMessage());
@@ -217,7 +216,6 @@ class Asanpardakht extends PortAbstract implements PortInterface
             $soap = new SoapClient($this->serverUrl);
             $response = $soap->RequestVerification($params);
             $response = $response->RequestVerificationResult;
-
         } catch (\SoapFault $e) {
             $this->transactionFailed();
             $this->newLog('SoapFault', $e->getMessage());
@@ -238,7 +236,6 @@ class Asanpardakht extends PortAbstract implements PortInterface
 
             if ($response != '600')
                 $this->newLog($response, AsanpardakhtException::getMessageByCode($response));
-
         } catch (\SoapFault $e) {
             //If fail, shaparak automatically do it in next 12 houres.
         }
@@ -274,7 +271,6 @@ class Asanpardakht extends PortAbstract implements PortInterface
 
             $response = $soap->EncryptInAES($params);
             return $response->EncryptInAESResult;
-
         } catch (\SoapFault $e) {
             return "";
         }
@@ -303,10 +299,8 @@ class Asanpardakht extends PortAbstract implements PortInterface
 
             $response = $soap->DecryptInAES($params);
             return $response->DecryptInAESResult;
-
         } catch (\SoapFault $e) {
             return "";
         }
     }
-
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace Ako\Gateway\Paypal;
+namespace Karabaman\Gateway\Paypal;
 
-use Ako\Gateway\Mellat\MellatException;
-use Ako\Gateway\Enum;
-use Ako\Gateway\Paypal\PaypalException;
+use Karabaman\Gateway\Mellat\MellatException;
+use Karabaman\Gateway\Enum;
+use Karabaman\Gateway\Paypal\PaypalException;
 use Illuminate\Support\Facades\Input;
-use Ako\Gateway\PortAbstract;
-use Ako\Gateway\PortInterface;
+use Karabaman\Gateway\PortAbstract;
+use Karabaman\Gateway\PortInterface;
 use PayPal\Api\Amount;
 use PayPal\Api\Item;
 use PayPal\Api\ItemList;
@@ -110,7 +110,8 @@ class Paypal extends PortAbstract implements PortInterface
         return $this;
     }
 
-    public function setProductName($name){
+    public function setProductName($name)
+    {
         $this->productName = $name;
 
         return $this;
@@ -123,8 +124,8 @@ class Paypal extends PortAbstract implements PortInterface
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
         $item_1 = new Item();
-        $item_1->setName($this->getProductName())// item name
-        ->setCurrency('USD')
+        $item_1->setName($this->getProductName()) // item name
+            ->setCurrency('USD')
             ->setQuantity(1)
             ->setPrice($this->amount); // unit price
         $item_2 = new Item();
@@ -222,7 +223,7 @@ class Paypal extends PortAbstract implements PortInterface
                 /** it's all right **/
                 /** Here Write your database logic like that insert record or value in database if you want **/
 
-//            \Session::put('success','Payment success');
+                //            \Session::put('success','Payment success');
                 return true;
             }
 
@@ -234,21 +235,21 @@ class Paypal extends PortAbstract implements PortInterface
         }
     }
 
-    public function getProductName(){
-        if(!$this->productName){
+    public function getProductName()
+    {
+        if (!$this->productName) {
             return $this->config['paypal']['default_product_name'];
         }
 
         return $this->productName;
     }
 
-    public function getShipmentPrice(){
-        if(!$this->shipmentPrice){
+    public function getShipmentPrice()
+    {
+        if (!$this->shipmentPrice) {
             return $this->config['paypal']['default_shipment_price'];
         }
 
         return $this->shipmentPrice;
     }
-
-
 }

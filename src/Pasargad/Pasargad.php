@@ -1,12 +1,12 @@
 <?php
 
-namespace Ako\Gateway\Pasargad;
+namespace Karabaman\Gateway\Pasargad;
 
 use Illuminate\Support\Facades\Input;
-use Ako\Gateway\Enum;
+use Karabaman\Gateway\Enum;
 use SoapClient;
-use Ako\Gateway\PortAbstract;
-use Ako\Gateway\PortInterface;
+use Karabaman\Gateway\PortAbstract;
+use Karabaman\Gateway\PortInterface;
 use Symfony\Component\VarDumper\Dumper\DataDumperInterface;
 
 class Pasargad extends PortAbstract implements PortInterface
@@ -53,7 +53,7 @@ class Pasargad extends PortAbstract implements PortInterface
 	public function redirect()
 	{
 
-		$processor = new RSAProcessor($this->config['pasargad']['certificate-path'],RSAKeyType::XMLFile);
+		$processor = new RSAProcessor($this->config['pasargad']['certificate-path'], RSAKeyType::XMLFile);
 
 		$url = $this->gateUrl;
 		$redirectUrl = $this->getCallback();
@@ -64,12 +64,12 @@ class Pasargad extends PortAbstract implements PortInterface
 		$timeStamp = date("Y/m/d H:i:s");
 		$invoiceDate = date("Y/m/d H:i:s");
 		$action = 1003;
-		$data = "#". $merchantCode ."#". $terminalCode ."#". $invoiceNumber ."#". $invoiceDate ."#". $amount ."#". $redirectUrl ."#". $action ."#". $timeStamp ."#";
-		$data = sha1($data,true);
+		$data = "#" . $merchantCode . "#" . $terminalCode . "#" . $invoiceNumber . "#" . $invoiceDate . "#" . $amount . "#" . $redirectUrl . "#" . $action . "#" . $timeStamp . "#";
+		$data = sha1($data, true);
 		$data =  $processor->sign($data); // امضاي ديجيتال
 		$sign =  base64_encode($data); // base64_encode
 
-		return \View::make('gateway::pasargad-redirector')->with(compact('url','redirectUrl','invoiceNumber','invoiceDate','amount','terminalCode','merchantCode','timeStamp','action','sign'));
+		return \View::make('gateway::pasargad-redirector')->with(compact('url', 'redirectUrl', 'invoiceNumber', 'invoiceDate', 'amount', 'terminalCode', 'merchantCode', 'timeStamp', 'action', 'sign'));
 	}
 
 	/**
@@ -125,21 +125,21 @@ class Pasargad extends PortAbstract implements PortInterface
 	 */
 	protected function verifyPayment()
 	{
-		$processor = new RSAProcessor($this->config['pasargad']['certificate-path'],RSAKeyType::XMLFile);
+		$processor = new RSAProcessor($this->config['pasargad']['certificate-path'], RSAKeyType::XMLFile);
 
 		if (!Input::has('tref'))
 			throw new PasargadErrorException('درخواست غیر معتبر', -1);
 
 		$fields = array('invoiceUID' => Input::get('tref'));
-		$result = Parser::post2https($fields,'https://pep.shaparak.ir/CheckTransactionResult.aspx');
+		$result = Parser::post2https($fields, 'https://pep.shaparak.ir/CheckTransactionResult.aspx');
 		$check_array = Parser::makeXMLTree($result);
 
 		if ($check_array['resultObj']['result'] != "True") {
-		    $this->newLog(-1, Enum::TRANSACTION_FAILED_TEXT);
-		    $this->transactionFailed();
-		    throw new PasargadErrorException(Enum::TRANSACTION_FAILED_TEXT, -1);
+			$this->newLog(-1, Enum::TRANSACTION_FAILED_TEXT);
+			$this->transactionFailed();
+			throw new PasargadErrorException(Enum::TRANSACTION_FAILED_TEXT, -1);
 		}
-		
+
 		$fields = array(
 			'MerchantCode' => $this->config['pasargad']['merchantId'],
 			'TerminalCode' => $this->config['pasargad']['terminalId'],
@@ -150,11 +150,11 @@ class Pasargad extends PortAbstract implements PortInterface
 			'sign' => '',
 		);
 
-		$data = "#" . $fields['MerchantCode'] . "#" . $fields['TerminalCode'] . "#" . $fields['InvoiceNumber'] ."#" . $fields['InvoiceDate'] . "#" . $fields['amount'] . "#" . $fields['TimeStamp'] ."#";
+		$data = "#" . $fields['MerchantCode'] . "#" . $fields['TerminalCode'] . "#" . $fields['InvoiceNumber'] . "#" . $fields['InvoiceDate'] . "#" . $fields['amount'] . "#" . $fields['TimeStamp'] . "#";
 		$data = sha1($data, true);
 		$data = $processor->sign($data);
 		$fields['sign'] = base64_encode($data);
-		$result = Parser::post2https($fields,"https://pep.shaparak.ir/VerifyPayment.aspx");
+		$result = Parser::post2https($fields, "https://pep.shaparak.ir/VerifyPayment.aspx");
 		$array = Parser::makeXMLTree($result);
 		if ($array['actionResult']['result'] != "True") {
 			$this->newLog(-1, Enum::TRANSACTION_FAILED_TEXT);

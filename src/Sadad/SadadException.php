@@ -1,8 +1,8 @@
 <?php
 
-namespace Ako\Gateway\Sadad;
+namespace Karabaman\Gateway\Sadad;
 
 
-use Ako\Gateway\Exceptions\BankException;
+use Karabaman\Gateway\Exceptions\BankException;
 
 class SadadException extends BankException {}

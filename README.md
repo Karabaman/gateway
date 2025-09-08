@@ -33,18 +33,18 @@ STEP 2 : Add `provider` and `facade` in config/app.php
 
     'providers' => [
       ...
-      Ako\Gateway\GatewayServiceProvider::class, // <-- add this line at the end of provider array
+      Karabaman\Gateway\GatewayServiceProvider::class, // <-- add this line at the end of provider array
     ],
 
 
     'aliases' => [
       ...
-      'Gateway' => Ako\Gateway\Gateway::class, // <-- add this line at the end of aliases array
+      'Gateway' => Karabaman\Gateway\Gateway::class, // <-- add this line at the end of aliases array
     ]
 
 Step 3:  
 
-    php artisan vendor:publish --provider=Ako\Gateway\GatewayServiceProvider
+    php artisan vendor:publish --provider=Karabaman\Gateway\GatewayServiceProvider
 
 Step 4: 
 
@@ -103,7 +103,7 @@ and in your callback :
         // تراکنش با موفقیت سمت بانک تایید گردید
         // در این مرحله عملیات خرید کاربر را تکمیل میکنیم
     
-    } catch (\Ako\Gateway\Exceptions\RetryException $e) {
+    } catch (\Karabaman\Gateway\Exceptions\RetryException $e) {
     
         // تراکنش قبلا سمت بانک تاییده شده است و
         // کاربر احتمالا صفحه را مجددا رفرش کرده است

@@ -1,8 +1,8 @@
 <?php
 
-namespace Ako\Gateway\JahanPay;
+namespace Karabaman\Gateway\JahanPay;
 
-use Ako\Gateway\Exceptions\BankException;
+use Karabaman\Gateway\Exceptions\BankException;
 
 class JahanPayException extends BankException
 {
@@ -26,6 +26,6 @@ class JahanPayException extends BankException
     {
         $this->errorId = intval($errorId);
 
-        parent::__construct(@self::$errors[$this->errorId].' #'.$this->errorId, $this->errorId);
+        parent::__construct(@self::$errors[$this->errorId] . ' #' . $this->errorId, $this->errorId);
     }
 }

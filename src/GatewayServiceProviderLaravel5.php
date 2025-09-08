@@ -1,6 +1,6 @@
 <?php
 
-namespace Ako\Gateway;
+namespace Karabaman\Gateway;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
@@ -21,38 +21,38 @@ class GatewayServiceProviderLaravel5 extends ServiceProvider
 	 */
 	public function boot()
 	{
-        $config = __DIR__ . '/../config/gateway.php';
-        $migrations = __DIR__ . '/../migrations/';
-        $views = __DIR__ . '/../views/';
+		$config = __DIR__ . '/../config/gateway.php';
+		$migrations = __DIR__ . '/../migrations/';
+		$views = __DIR__ . '/../views/';
 
-        //php artisan vendor:publish --provider=Ako\Gateway\GatewayServiceProvider --tag=config
-        $this->publishes([
-            $config => config_path('gateway.php'),
-        ], 'config');
+		//php artisan vendor:publish --provider=Karabaman\Gateway\GatewayServiceProvider --tag=config
+		$this->publishes([
+			$config => config_path('gateway.php'),
+		], 'config');
 
-        // php artisan vendor:publish --provider=Ako\Gateway\GatewayServiceProvider --tag=migrations
-        $this->publishes([
-            $migrations => base_path('database/migrations')
-        ], 'migrations');
-
-
-
-        if (
-            File::glob(base_path('/database/migrations/*create_gateway_status_log_table\.php'))
-            && !File::exists(base_path('/database/migrations/2017_04_05_103357_alter_id_in_transactions_table.php'))
-        ) {
-            @File::copy($migrations.'/2017_04_05_103357_alter_id_in_transactions_table.php',base_path('database/migrations/2017_04_05_103357_alter_id_in_transactions_table.php'));
-        }
+		// php artisan vendor:publish --provider=Karabaman\Gateway\GatewayServiceProvider --tag=migrations
+		$this->publishes([
+			$migrations => base_path('database/migrations')
+		], 'migrations');
 
 
-        $this->loadViewsFrom($views, 'gateway');
 
-        // php artisan vendor:publish --provider=Ako\Gateway\GatewayServiceProvider --tag=views
-        $this->publishes([
-            $views => base_path('resources/views/vendor/gateway'),
-        ], 'views');
+		if (
+			File::glob(base_path('/database/migrations/*create_gateway_status_log_table\.php'))
+			&& !File::exists(base_path('/database/migrations/2017_04_05_103357_alter_id_in_transactions_table.php'))
+		) {
+			@File::copy($migrations . '/2017_04_05_103357_alter_id_in_transactions_table.php', base_path('database/migrations/2017_04_05_103357_alter_id_in_transactions_table.php'));
+		}
 
-        //$this->mergeConfigFrom( $config,'gateway')
+
+		$this->loadViewsFrom($views, 'gateway');
+
+		// php artisan vendor:publish --provider=Karabaman\Gateway\GatewayServiceProvider --tag=views
+		$this->publishes([
+			$views => base_path('resources/views/vendor/gateway'),
+		], 'views');
+
+		//$this->mergeConfigFrom( $config,'gateway')
 	}
 
 	/**
@@ -65,6 +65,5 @@ class GatewayServiceProviderLaravel5 extends ServiceProvider
 		$this->app->singleton('gateway', function () {
 			return new GatewayResolver();
 		});
-
 	}
 }

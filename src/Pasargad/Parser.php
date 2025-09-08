@@ -1,5 +1,6 @@
 <?php
-namespace Ako\Gateway\Pasargad;
+
+namespace Karabaman\Gateway\Pasargad;
 
 use Illuminate\Support\Facades\Input;
 
@@ -35,7 +36,7 @@ class Parser
                     break;
                 case 'complete':
                     array_push($hash_stack, $val['tag']);
-                    if(!isset($val['value'])){
+                    if (!isset($val['value'])) {
                         $val['value'] = $temp[$val['tag']];
                     }
 
@@ -45,7 +46,7 @@ class Parser
             }
         }
 
-        return $ret ;
+        return $ret;
     }
 
 

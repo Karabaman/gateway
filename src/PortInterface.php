@@ -1,6 +1,6 @@
 <?php
 
-namespace Ako\Gateway;
+namespace Karabaman\Gateway;
 
 interface PortInterface
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Ako\Gateway\Payir;
+namespace Karabaman\Gateway\Payir;
 
-use Ako\Gateway\Exceptions\BankException;
+use Karabaman\Gateway\Exceptions\BankException;
 
 class PayirSendException extends BankException
 {
@@ -22,6 +22,6 @@ class PayirSendException extends BankException
     {
         $this->errorId = $errorId;
 
-        parent::__construct(@self::$errors[ $errorId ] . ' #' . $errorId, $errorId);
+        parent::__construct(@self::$errors[$errorId] . ' #' . $errorId, $errorId);
     }
 }

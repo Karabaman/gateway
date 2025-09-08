@@ -1,20 +1,20 @@
 <?php
 
-namespace Ako\Gateway;
+namespace Karabaman\Gateway;
 
-use Ako\Gateway\Parsian\Parsian;
-use Ako\Gateway\Paypal\Paypal;
-use Ako\Gateway\Sadad\Sadad;
-use Ako\Gateway\Mellat\Mellat;
-use Ako\Gateway\Pasargad\Pasargad;
-use Ako\Gateway\Saman\Saman;
-use Ako\Gateway\Asanpardakht\Asanpardakht;
-use Ako\Gateway\Zarinpal\Zarinpal;
-use Ako\Gateway\Payir\Payir;
-use Ako\Gateway\Exceptions\RetryException;
-use Ako\Gateway\Exceptions\PortNotFoundException;
-use Ako\Gateway\Exceptions\InvalidRequestException;
-use Ako\Gateway\Exceptions\NotFoundTransactionException;
+use Karabaman\Gateway\Parsian\Parsian;
+use Karabaman\Gateway\Paypal\Paypal;
+use Karabaman\Gateway\Sadad\Sadad;
+use Karabaman\Gateway\Mellat\Mellat;
+use Karabaman\Gateway\Pasargad\Pasargad;
+use Karabaman\Gateway\Saman\Saman;
+use Karabaman\Gateway\Asanpardakht\Asanpardakht;
+use Karabaman\Gateway\Zarinpal\Zarinpal;
+use Karabaman\Gateway\Payir\Payir;
+use Karabaman\Gateway\Exceptions\RetryException;
+use Karabaman\Gateway\Exceptions\PortNotFoundException;
+use Karabaman\Gateway\Exceptions\InvalidRequestException;
+use Karabaman\Gateway\Exceptions\NotFoundTransactionException;
 use Illuminate\Support\Facades\DB;
 
 class GatewayResolver
@@ -144,21 +144,21 @@ class GatewayResolver
      */
     function make($port)
     {
-        if ($port InstanceOf Mellat) {
+        if ($port instanceof Mellat) {
             $name = Enum::MELLAT;
-        } elseif ($port InstanceOf Parsian) {
+        } elseif ($port instanceof Parsian) {
             $name = Enum::PARSIAN;
-        } elseif ($port InstanceOf Saman) {
+        } elseif ($port instanceof Saman) {
             $name = Enum::SAMAN;
-        } elseif ($port InstanceOf Zarinpal) {
+        } elseif ($port instanceof Zarinpal) {
             $name = Enum::ZARINPAL;
-        } elseif ($port InstanceOf Sadad) {
+        } elseif ($port instanceof Sadad) {
             $name = Enum::SADAD;
-        } elseif ($port InstanceOf Asanpardakht) {
+        } elseif ($port instanceof Asanpardakht) {
             $name = Enum::ASANPARDAKHT;
-        } elseif ($port InstanceOf Paypal) {
+        } elseif ($port instanceof Paypal) {
             $name = Enum::PAYPAL;
-        } elseif ($port InstanceOf Payir) {
+        } elseif ($port instanceof Payir) {
             $name = Enum::PAYIR;
         } elseif (in_array(strtoupper($port), $this->getSupportedPorts())) {
             $port = ucfirst(strtolower($port));

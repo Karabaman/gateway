@@ -1,13 +1,13 @@
 <?php
 
-namespace Ako\Gateway\Mellat;
+namespace Karabaman\Gateway\Mellat;
 
 use DateTime;
 use Illuminate\Support\Facades\Input;
-use Ako\Gateway\Enum;
+use Karabaman\Gateway\Enum;
 use SoapClient;
-use Ako\Gateway\PortAbstract;
-use Ako\Gateway\PortInterface;
+use Karabaman\Gateway\PortAbstract;
+use Karabaman\Gateway\PortInterface;
 
 class Mellat extends PortAbstract implements PortInterface
 {
@@ -20,8 +20,8 @@ class Mellat extends PortAbstract implements PortInterface
 	 */
 	protected $serverUrl = 'https://bpm.shaparak.ir/pgwchannel/services/pgw?wsdl';
 	protected $additionla_data;
-	
-	
+
+
 	/**
 	 * {@inheritdoc}
 	 */
@@ -49,7 +49,7 @@ class Mellat extends PortAbstract implements PortInterface
 	{
 		$refId = $this->refId;
 
-        return \View::make('gateway::mellat-redirector')->with(compact('refId'));
+		return \View::make('gateway::mellat-redirector')->with(compact('refId'));
 	}
 
 	/**
@@ -83,7 +83,7 @@ class Mellat extends PortAbstract implements PortInterface
 	 *
 	 * @return void
 	 */
-	function setAdditionalData ($data)
+	function setAdditionalData($data)
 	{
 		$this->additionla_data = $data;
 	}
@@ -93,7 +93,7 @@ class Mellat extends PortAbstract implements PortInterface
 	 *
 	 * @return string 
 	 */
-	function getAdditionalData ()
+	function getAdditionalData()
 	{
 		return $this->additionla_data;
 	}
@@ -138,8 +138,7 @@ class Mellat extends PortAbstract implements PortInterface
 
 		try {
 			$soap = new \SoapClient($this->serverUrl);
-            $response = $soap->bpPayRequest($fields);
-
+			$response = $soap->bpPayRequest($fields);
 		} catch (\SoapFault $e) {
 			$this->transactionFailed();
 			$this->newLog('SoapFault', $e->getMessage());
@@ -202,7 +201,6 @@ class Mellat extends PortAbstract implements PortInterface
 		try {
 			$soap = new SoapClient($this->serverUrl);
 			$response = $soap->bpVerifyRequest($fields);
-
 		} catch (\SoapFault $e) {
 			$this->transactionFailed();
 			$this->newLog('SoapFault', $e->getMessage());
@@ -240,7 +238,6 @@ class Mellat extends PortAbstract implements PortInterface
 		try {
 			$soap = new SoapClient($this->serverUrl);
 			$response = $soap->bpSettleRequest($fields);
-
 		} catch (\SoapFault $e) {
 			$this->transactionFailed();
 			$this->newLog('SoapFault', $e->getMessage());

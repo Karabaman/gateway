@@ -1,8 +1,8 @@
 <?php
 
-namespace Ako\Gateway\Mellat;
+namespace Karabaman\Gateway\Mellat;
 
-use Ako\Gateway\Exceptions\BankException;
+use Karabaman\Gateway\Exceptions\BankException;
 
 class MellatException extends BankException
 {
@@ -40,7 +40,7 @@ class MellatException extends BankException
         49 => 'تراکنش Refund یافت نشد.',
         412 => 'شناسه قبض نادرست است',
         413 => 'شناسه پرداخت نادرست است',
-        414=> 'سازمان صادر کننده قبض نامعتبر است',
+        414 => 'سازمان صادر کننده قبض نامعتبر است',
         415 => 'زمان جلسه کاری به پایان رسیده است',
         416 => 'خطا در ثبت اطلاعات',
         417 => 'شناسه پرداخت کننده نامعتبر است',
@@ -57,6 +57,6 @@ class MellatException extends BankException
     {
         $this->errorId = intval($errorId);
 
-        parent::__construct(@self::$errors[$this->errorId].' #'.$this->errorId, $this->errorId);
+        parent::__construct(@self::$errors[$this->errorId] . ' #' . $this->errorId, $this->errorId);
     }
 }

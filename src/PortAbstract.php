@@ -1,9 +1,9 @@
 <?php
 
-namespace Ako\Gateway;
+namespace Karabaman\Gateway;
 
 use Illuminate\Support\Facades\Request;
-use Ako\Gateway\Enum;
+use Karabaman\Gateway\Enum;
 use Carbon\Carbon;
 
 abstract class PortAbstract
@@ -84,10 +84,7 @@ abstract class PortAbstract
     }
 
     /** bootstraper */
-    function boot()
-    {
-
-    }
+    function boot() {}
 
     /**
      * @param array $config
@@ -307,7 +304,6 @@ abstract class PortAbstract
             'ref_id' => $this->refId,
             'updated_at' => Carbon::now(),
         ]);
-
     }
 
     /**

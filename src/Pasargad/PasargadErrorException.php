@@ -1,7 +1,7 @@
 <?php
 
-namespace Ako\Gateway\Pasargad;
+namespace Karabaman\Gateway\Pasargad;
 
-use Ako\Gateway\Exceptions\BankException;
+use Karabaman\Gateway\Exceptions\BankException;
 
 class PasargadErrorException extends BankException {}
