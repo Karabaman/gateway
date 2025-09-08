@@ -27,7 +27,7 @@ Run below statements on your terminal :
 
 STEP 1 : 
 
-    composer require ako/gateway
+    composer require karabaman/gateway
     
 STEP 2 : Add `provider` and `facade` in config/app.php
 
