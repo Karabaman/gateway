@@ -1,0 +1,78 @@
+{
+  "name": "karabaman/gateway",
+  "homepage": "https://github.com/karabaman/gateway",
+  "description": "Connect to Iran payment gateways through PHP(laravel).",
+  "keywords": [
+    "laravel",
+    "iran",
+    "payment",
+    "gateway",
+    "port",
+    "bank",
+    "pay",
+    "mellat",
+    "saman",
+    "pasargad",
+    "parsian",
+    "sadad",
+    "meli",
+    "payline",
+    "jahanpay",
+    "zarinpal",
+    "iranian-banks",
+    "persian-banks",
+    "pardakht",
+    "dargah",
+    "shaparak",
+    "poolport",
+    "ipay",
+    "asan-pardakht",
+    "pay-ir",
+    "paypal",
+    "next-pay"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Hamed Pakdaman",
+      "email": "pakdaman.it@gmail.com"
+    },
+    {
+      "name": "MohammadReza Honarkhah",
+      "email": "m.honar@gmail.com"
+    },
+    {
+      "name": "Amir Khorsandi",
+      "email": "Khorsandi@me.com"
+    },
+    {
+      "name": "Ako Salman",
+      "email": "aspire.me@yahoo.com"
+    },
+    {
+      "name": "Hamid Samak",
+      "email": "hamidreza.samak@gmail.com"
+    }
+  ],
+  "require": {
+    "nesbot/carbon": "^3.0",
+    "paypal/rest-api-sdk-php": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Karabaman\\Gateway\\": "src/",
+      "Karabaman\\Gateway\\Tests\\": "tests/"
+    }
+  },
+  "minimum-stability": "dev",
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Karabaman\\Gateway\\GatewayServiceProvider"
+      ],
+      "aliases": {
+        "Gateway": "Karabaman\\Gateway\\Gateway"
+      }
+    }
+  }
+}
